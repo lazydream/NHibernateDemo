@@ -19,16 +19,28 @@ namespace WebAPINhibernate.Controllers
     {
         public string GetSomething()
         {
-            Configuration config = new Configuration()
-                .DataBaseIntegration(db =>
-                {
-                    db.ConnectionString = "server=127.0.0.1;port = 5432;database = Nhibernatepg;user id = postgres;password = zaragosa;";
-                    db.Dialect<PostgreSQLDialect>();
-                    db.LogFormattedSql = true;
-                    db.LogSqlInConsole = true;
-                });
 
-            //Add the mapping
+            Configuration config = new Configuration();
+            try
+            {
+                config.Configure();
+            } catch (Exception e)
+            {
+                return e.InnerException.Message;
+            }
+            
+            //    .DataBaseIntegration(db =>
+            //    {
+            //        db.ConnectionString = "server=127.0.0.1;port = 5432;database = Nhibernatepg;user id = postgres;password = zaragosa;";
+            //        db.Dialect<PostgreSQLDialect>();
+            //        db.LogFormattedSql = true;
+            //        db.LogSqlInConsole = true;
+            //    });
+
+            //NHibernate.Tool.hbm2ddl.SchemaUpdate SchemaUpdater = new NHibernate.Tool.hbm2ddl.SchemaUpdate(config);
+            
+
+            ////Add the mapping
             var mapper = new ModelMapper();
             mapper.AddMappings(Assembly.GetExecutingAssembly().GetExportedTypes());
 

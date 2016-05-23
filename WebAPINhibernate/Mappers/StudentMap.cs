@@ -13,10 +13,25 @@ namespace WebAPINhibernate.Mappers
     {
         public StudentMap()
         {
+            Table("Student");
+            Schema("public");
             Id(x => x.ID, m => m.Generator(Generators.Native, g => g.Params(new { sequence = "autoinc_pk" })));
-            Property(s => s.LastName);
-            Property(s => s.FirstName);
-
+            Property(s => s.LastName, m =>
+            {
+                m.Column(c =>
+                {
+                    c.Name("LastName");
+                    c.SqlType("text");
+                });
+            });
+            Property(s => s.FirstName, m =>
+            {
+                m.Column(c =>
+                {
+                    c.Name("FirstName");
+                    c.SqlType("text");
+                });
+            });
         }
     }
 }
