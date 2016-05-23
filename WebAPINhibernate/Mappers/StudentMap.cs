@@ -16,6 +16,7 @@ namespace WebAPINhibernate.Mappers
             Id(x => x.ID, m => m.Generator(Generators.Native, g => g.Params(new { sequence = "autoinc_pk" })));
             Property(s => s.LastName);
             Property(s => s.FirstName);
+
         }
     }
 }
